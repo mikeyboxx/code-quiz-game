@@ -1,0 +1,44 @@
+// DEPENDENCIES (DOM ELEMENTS)
+// View high scores -  link - top left corner  
+//    - displays High scores section
+// Timer countdown box - Timer: 75 - top right corner
+
+// Intro Screen 
+//  heading
+//  desription box
+// Start Quiz - button - center with Title and description on top
+
+// End of Game stats
+//   title - All Done!
+//    Your final score is: 22
+//
+//    Enter initials input/label box 
+//     submit button 
+//
+//  High scores section
+//   title - High Scores
+//   orldered list of initials/score boxes   
+//      go back button
+//      clear high scores button
+//   - hide link and timer
+
+// Question section 
+//   question box
+//   ordered list of answer boxes (must be clickable)
+//        - when clicked change color
+//        - display (Wrong! or Correct!) in message box
+//        - display next question section  
+//   line break
+//   message box (Wrong! or Correct!)
+
+
+
+
+
+// DATA / STATE
+
+// FUNCTIONS
+
+// USER INTERACTIONS
+
+// INITIALIZATION
