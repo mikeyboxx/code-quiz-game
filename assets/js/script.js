@@ -34,13 +34,14 @@
 //   line break
 //   message box (Wrong! or Correct!)
 
-
-
-
-
 // DATA / STATE
+// need two dimensional array containing a question and 4 answers
+// need a timer
+// need to store the score
+// need two dimensional array containing initials and score
 
 // FUNCTIONS
+
 
 // USER INTERACTIONS
 // click on High Scores link
@@ -52,3 +53,6 @@
 // close browser
 
 // INITIALIZATION
+// hide all parent sections, 
+// display only timer and intro sections
+// 
