@@ -43,5 +43,12 @@
 // FUNCTIONS
 
 // USER INTERACTIONS
+// click on High Scores link
+// click on start quiz button
+// click on answer box
+// click on Submit initials button 
+// click on Go Back button
+// click on Clear High Scores button
+// close browser
 
 // INITIALIZATION
