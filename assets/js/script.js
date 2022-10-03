@@ -56,3 +56,24 @@
 // hide all parent sections, 
 // display only timer and intro sections
 // 
+
+// bind DOM elements to variables
+var timerContainer = document.getElementById('timer-container');
+var introContainer = document.getElementById('intro-container');
+var questionContainer = document.getElementById('question-container');
+var finalScoreContainer = document.getElementById('final-score-container');
+var highScoresContainer = document.getElementById('high-scores-container');
+var answerMessageContainer = document.getElementById('answer-message-container');
+
+
+
+
+// set initial display state
+timerContainer.style.visibility = 'visible';
+introContainer.style.visibility = 'visible';
+questionContainer.style.visibility = 'hidden';
+finalScoreContainer.style.visibility = 'hidden';
+highScoresContainer.style.visibility = 'hidden';
+answerMessageContainer.style.visibility = 'hidden';
+
+
