@@ -8,6 +8,55 @@
     <title>Document</title>
 </head>
 <body>
+    <header id="timer-container">
+        <a href="#">View High Scores</a>
+        <p>Timer: <span id="timer"></span></p>
+    </header>
+    <main>
+        <section id="intro-container">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Answer the following code related questions within the time limit. Your score is the remianing time on the clock. Keep in mind that incorrect answers will penalize your time/score by 10 seconds!</p>
+            <button id="start-btn">Start Quiz</button>
+        </section>
+        <section id="question-container">
+            <p id="question">
+                The question content and the answer list items will be dynamically _________.
+            </p>
+            <ol id="answer-list">
+                <li id="li0">buried</li>
+                <li id="li1">fried</li>
+                <li id="li2">generated</li>
+                <li id="li3">thrown out</li>
+            </ol>
+        </section>
+        <section id="final-score-container">
+            <h2>All Done!</h2>
+            <p>Your final score is <span id="final-score">22</span>.</p>
+            <form id="initials-form" action="">
+                <label for="initials">Enter your initials: </label>
+                <input type="text" 
+                       name="initials" 
+                       id="initials-text" 
+                       required
+                       placeholder="Your initials here">
+                <button id="initials-button" >Submit</button>
+            </form>
+        </section>
+        <section>
+            <h2>High Scores</h2>
+            <ol id="high-scores-list">
+                <li>MN - 345</li>
+                <li>AG - 234</li>
+                <li>BW - 122</li>
+            </ol>
+            <button id="goback-button">Go Back</button>
+            <button id="clear-scores-button">Clear High Scores</button>
+        </section>
+    </main>
+    <footer>
+        <br>
+        <p id="answer-message">Correct!</p>
+    </footer>
     <script src="assets/js/script.js"></script>     
 </body>
 </html>

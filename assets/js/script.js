@@ -11,6 +11,7 @@
 // End of Game stats
 //   title - All Done!
 //    Your final score is: 22
+//    -final score is time remaining
 //
 //    Enter initials input/label box 
 //     submit button 
@@ -28,6 +29,8 @@
 //        - when clicked change color
 //        - display (Wrong! or Correct!) in message box
 //        - display next question section  
+//
+// Answer Message section
 //   line break
 //   message box (Wrong! or Correct!)
 
