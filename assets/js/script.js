@@ -208,6 +208,8 @@ var finalScoreInitialsFormSubmit = function (event){
         score: secsRemaining
     });
 
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+    
     // sort in descending order. highest scores show up first
     highScores.sort((a, b)=>{
         if (a.score > b.score){  
@@ -245,6 +247,7 @@ var clearScoresButtonClick = function (event){
     event.stopPropagation();
     highScores = [];
     highScoresList.innerHTML = '';
+    localStorage.removeItem('highScores');
 };
 
 var highScoresLinkCallback = function (event){
@@ -264,6 +267,9 @@ var highScoresLinkCallback = function (event){
 hideAllSections();
 timerContainer.style.visibility = 'visible';
 introContainer.style.visibility = 'visible';
+
+var localStorageItem = JSON.parse(localStorage.getItem('highScores'));
+if (localStorageItem !== null) highScores = localStorageItem;
 
 startQuizButton.addEventListener('click',startQuizButtonClick);
 finalScoreInitialsForm.addEventListener('submit',finalScoreInitialsFormSubmit);
