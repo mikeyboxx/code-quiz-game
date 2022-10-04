@@ -78,22 +78,21 @@ var questionText = document.getElementById('question-text');
 var questionChoicesList = document.getElementById('question-choices-list');
 var finalScoreText = document.getElementById('final-score-text');
 var answerMessageText = document.getElementById('answer-message-text');
+var finalScoreInitialsForm = document.getElementById('final-score-initials-form');
+var finalScoreInitialsText = document.getElementById('final-score-initials-text');
+var highScoresList = document.getElementById('high-scores-list');
 
 // global variables
 var timerObj = {};
-const START_SECS = 75;
+const START_SECS = 5;
 var secsRemaining = START_SECS;
 var currentQuestionIdx = -1;
 var highScores = [];   // an array of score objects
-var scoreObj = {
-        initials: '',
-        score: 0,   
-    };
 
 // event listeners
 var highScoresLinkCallback = function (){};
-var submitScoreButtonCallback = function (){};
-var goBackButtonCallback = function (){};
+// var submitScoreButtonCallback = function (){};
+
 var clearScoresButtonCallback = function (){};
 
 
@@ -107,11 +106,13 @@ function loadNextQuestion(){
     currentQuestionIdx++;
 
     // reached the end of questions
-    if (currentQuestionIdx === quiz.length){
+    if (currentQuestionIdx >= quiz.length){
         clearInterval(timerObj);
         hideAllSections();
         timerContainer.style.visibility = 'visible';
         finalScoreContainer.style.visibility = 'visible';
+        answerMessageContainer.style.visibility = 'visible';
+        finalScoreInitialsText.value = '';
         finalScoreText.textContent = secsRemaining;
         return;
     }
@@ -147,7 +148,16 @@ var startQuizButtonClick = function (event){
     timerObj = setInterval(() => { 
         secsRemaining--;
         timerText.textContent = secsRemaining;
-        if (secsRemaining === 0) clearInterval(timerObj);
+        if (secsRemaining === 0) {
+            clearInterval(timerObj);
+            hideAllSections();
+            timerContainer.style.visibility = 'visible';
+            finalScoreContainer.style.visibility = 'visible';
+            answerMessageContainer.style.visibility = 'visible';
+            finalScoreText.textContent = secsRemaining;
+            finalScoreInitialsText.value = '';
+            timerText.textContent = secsRemaining;
+        }
     },1000);
 };
 
@@ -162,9 +172,15 @@ var questionChoiceMouseUp = function (event){
     if (quiz[currentQuestionIdx].answer !== Number(elIdx)){
         answerMessageContainer.style.visibility = 'visible';
         answerMessageText.textContent = 'Wrong!';
-        if (secsRemaining - 10 < 0){
-            clearInterval(timerObj);
+        if (secsRemaining - 10 <= 0){
             secsRemaining = 0;
+            clearInterval(timerObj);
+            hideAllSections();
+            timerContainer.style.visibility = 'visible';
+            finalScoreContainer.style.visibility = 'visible';
+            answerMessageContainer.style.visibility = 'visible';
+            finalScoreText.textContent = secsRemaining;
+            finalScoreInitialsText.value = '';
             timerText.textContent = secsRemaining;
         } else {
             secsRemaining -= 10;
@@ -184,12 +200,52 @@ var questionChoiceMouseDown = function (event){
     answerMessageContainer.style.visibility = 'hidden';
 }
 
+var finalScoreInitialsFormSubmit = function (event){
+    event.preventDefault();
+    // event.stopPropagation();
+    highScores.push({
+        initials: finalScoreInitialsText.value.toUpperCase(),
+        score: secsRemaining
+    });
+
+    highScores.sort((a, b)=>{
+        if (a.score < b.score){
+            return -1;
+        }
+        if (a.score > b.score){
+            return 1;
+        }
+        return 0; // a must equal to b
+    })
+
+    hideAllSections();
+    highScoresContainer.style.visibility = 'visible';
+    highScoresList.innerHTML = '';
+
+    for (var i = 0; i < highScores.length; i++){
+        var el = document.createElement('li');
+        el.textContent = highScores[i].initials + ' - ' + highScores[i].score;
+        highScoresList.appendChild(el);
+    }
+}
+
+
+var goBackButtonClick = function (){
+    hideAllSections();
+    timerContainer.style.visibility = 'visible';
+    introContainer.style.visibility = 'visible';
+    currentQuestionIdx = -1;
+};
+
+
 // set initial display state
 hideAllSections();
 timerContainer.style.visibility = 'visible';
 introContainer.style.visibility = 'visible';
 
 startQuizButton.addEventListener('click',startQuizButtonClick);
+finalScoreInitialsForm.addEventListener('submit',finalScoreInitialsFormSubmit);
+goBackButton.addEventListener('click', goBackButtonClick);
 
 
 
