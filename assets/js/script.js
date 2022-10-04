@@ -1,63 +1,5 @@
-// DEPENDENCIES (DOM ELEMENTS)
-// View high scores -  link - top left corner  
-//    - displays High scores section
-// Timer countdown box - Timer: 75 - top right corner
 
-// Intro Screen 
-//  heading
-//  desription box
-// Start Quiz - button - center with Title and description on top
-
-// End of Game stats
-//   title - All Done!
-//    Your final score is: 22
-//    -final score is time remaining
-//
-//    Enter initials input/label box 
-//     submit button 
-//
-//  High scores section
-//   title - High Scores
-//   orldered list of initials/score boxes   
-//      go back button
-//      clear high scores button
-//   - hide link and timer
-
-// Question section 
-//   question box
-//   ordered list of answer boxes (must be clickable)
-//        - when clicked change color
-//        - display (Wrong! or Correct!) in message box
-//        - display next question section  
-//
-// Answer Message section
-//   line break
-//   message box (Wrong! or Correct!)
-
-// DATA / STATE
-// need two dimensional array containing a question and 4 answers
-// need a timer
-// need to store the score
-// need two dimensional array containing initials and score
-
-// FUNCTIONS
-
-
-// USER INTERACTIONS
-// click on High Scores link
-// click on start quiz button
-// click on answer box
-// click on Submit initials button 
-// click on Go Back button
-// click on Clear High Scores button
-// close browser
-
-// INITIALIZATION
-// hide all parent sections, 
-// display only timer and intro sections
-// 
-
-// bind DOM elements to variables
+// section containers
 var timerContainer = document.getElementById('timer-container');
 var introContainer = document.getElementById('intro-container');
 var questionContainer = document.getElementById('question-container');
@@ -71,6 +13,7 @@ var startQuizButton = document.getElementById('start-quiz-button');
 var submitScoreButton = document.getElementById('submit-score-button');
 var goBackButton = document.getElementById('go-back-button');
 var clearScoresButton = document.getElementById('clear-scores-button');
+var finalScoreInitialsForm = document.getElementById('final-score-initials-form');
 
 // display elements
 var timerText = document.getElementById('timer-text');
@@ -78,7 +21,6 @@ var questionText = document.getElementById('question-text');
 var questionChoicesList = document.getElementById('question-choices-list');
 var finalScoreText = document.getElementById('final-score-text');
 var answerMessageText = document.getElementById('answer-message-text');
-var finalScoreInitialsForm = document.getElementById('final-score-initials-form');
 var finalScoreInitialsText = document.getElementById('final-score-initials-text');
 var highScoresList = document.getElementById('high-scores-list');
 
@@ -89,17 +31,12 @@ var secsRemaining = START_SECS;
 var currentQuestionIdx = -1;
 var highScores = [];   // an array of score objects
 
-// event listeners
-
-// var submitScoreButtonCallback = function (){};
-
-
-
 
 // hide all children of the <main> tag
 function hideAllSections(){
     for (var i = 0; i < document.body.children[0].children.length; i++)
-    document.body.children[0].children[i].style.visibility = 'hidden'
+    // document.body.children[0].children[i].style.visibility = 'hidden';
+    document.body.children[0].children[i].style.display = 'none';
 }
 
 function loadNextQuestion(){
@@ -109,9 +46,9 @@ function loadNextQuestion(){
     if (currentQuestionIdx >= quiz.length){
         clearInterval(timerObj);
         hideAllSections();
-        timerContainer.style.visibility = 'visible';
-        finalScoreContainer.style.visibility = 'visible';
-        answerMessageContainer.style.visibility = 'visible';
+        timerContainer.style.display = 'initial';
+        finalScoreContainer.style.display = 'initial';
+        answerMessageContainer.style.display = 'initial';
         finalScoreInitialsText.value = '';
         finalScoreText.textContent = secsRemaining;
         return;
@@ -137,8 +74,8 @@ var startQuizButtonClick = function (event){
     event.stopPropagation();
     // initialize diplay state
     hideAllSections();
-    timerContainer.style.visibility = 'visible';
-    questionContainer.style.visibility = 'visible';
+    timerContainer.style.display = 'initial';
+    questionContainer.style.display = 'initial';
 
     loadNextQuestion();
     
@@ -151,9 +88,9 @@ var startQuizButtonClick = function (event){
         if (secsRemaining === 0) {
             clearInterval(timerObj);
             hideAllSections();
-            timerContainer.style.visibility = 'visible';
-            finalScoreContainer.style.visibility = 'visible';
-            answerMessageContainer.style.visibility = 'visible';
+            timerContainer.style.display = 'initial';
+            finalScoreContainer.style.display = 'initial';
+            answerMessageContainer.style.display = 'initial';
             finalScoreText.textContent = secsRemaining;
             finalScoreInitialsText.value = '';
             timerText.textContent = secsRemaining;
@@ -170,15 +107,15 @@ var questionChoiceMouseUp = function (event){
     var elIdx = (el.id[el.id.length-1]);
     
     if (quiz[currentQuestionIdx].answer !== Number(elIdx)){
-        answerMessageContainer.style.visibility = 'visible';
+        answerMessageContainer.style.display = 'initial';
         answerMessageText.textContent = 'Wrong!';
         if (secsRemaining - 10 <= 0){
             secsRemaining = 0;
             clearInterval(timerObj);
             hideAllSections();
-            timerContainer.style.visibility = 'visible';
-            finalScoreContainer.style.visibility = 'visible';
-            answerMessageContainer.style.visibility = 'visible';
+            timerContainer.style.display = 'initial';
+            finalScoreContainer.style.display = 'initial';
+            answerMessageContainer.style.display = 'initial';
             finalScoreText.textContent = secsRemaining;
             finalScoreInitialsText.value = '';
             timerText.textContent = secsRemaining;
@@ -186,7 +123,7 @@ var questionChoiceMouseUp = function (event){
             secsRemaining -= 10;
         }
     } else {
-        answerMessageContainer.style.visibility = 'visible';
+        answerMessageContainer.style.display = 'initial';
         answerMessageText.textContent = 'Correct!';
         loadNextQuestion();
     }
@@ -222,7 +159,7 @@ var finalScoreInitialsFormSubmit = function (event){
     })
 
     hideAllSections();
-    highScoresContainer.style.visibility = 'visible';
+    highScoresContainer.style.display = 'initial';
     highScoresList.innerHTML = '';
 
     for (var i = 0; i < highScores.length; i++){
@@ -236,8 +173,8 @@ var finalScoreInitialsFormSubmit = function (event){
 var goBackButtonClick = function (event){
     event.stopPropagation();
     hideAllSections();
-    timerContainer.style.visibility = 'visible';
-    introContainer.style.visibility = 'visible';
+    timerContainer.style.display = 'initial';
+    introContainer.style.display = 'initial';
     timerText.textContent = 0;
     currentQuestionIdx = -1;
     secsRemaining = START_SECS;
@@ -253,7 +190,7 @@ var clearScoresButtonClick = function (event){
 var highScoresLinkCallback = function (event){
     event.stopPropagation();
     hideAllSections();
-    highScoresContainer.style.visibility = 'visible';
+    highScoresContainer.style.display = 'initial';
     highScoresList.innerHTML = '';
 
     for (var i = 0; i < highScores.length; i++){
@@ -265,8 +202,8 @@ var highScoresLinkCallback = function (event){
 
 // set initial display state
 hideAllSections();
-timerContainer.style.visibility = 'visible';
-introContainer.style.visibility = 'visible';
+timerContainer.style.display = 'initial';
+introContainer.style.display = 'initial';
 
 var localStorageItem = JSON.parse(localStorage.getItem('highScores'));
 if (localStorageItem !== null) highScores = localStorageItem;
