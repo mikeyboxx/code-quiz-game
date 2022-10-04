@@ -76,6 +76,7 @@ var clearScoresButton = document.getElementById('clear-scores-button');
 var timerText = document.getElementById('timer-text');
 var questionText = document.getElementById('question-text');
 var questionChoicesList = document.getElementById('question-choices-list');
+var finalScoreText = document.getElementById('final-score-text');
 
 // global variables
 var timerObj = {};
@@ -105,6 +106,16 @@ function hideAllSections(){
 function loadNextQuestion(){
     currentQuestionIdx++;
 
+    // reached the end of questions
+    if (currentQuestionIdx === quiz.length){
+        clearInterval(timerObj);
+        hideAllSections();
+        timerContainer.style.visibility = 'visible';
+        finalScoreContainer.style.visibility = 'visible';
+        finalScoreText.textContent = secsRemaining;
+        return;
+    }
+
     questionText.textContent = quiz[currentQuestionIdx].question;
     questionChoicesList.innerHTML = '';
     // generate <li> tags for every answer choice in the quiz object array
@@ -130,11 +141,12 @@ var startQuizButtonCallback = function (event){
     loadNextQuestion();
     
     //  display on page and decrement seconds remaining 
-    timerText.textContent = secsRemaining--;
     // launch timer and display on page
+    timerText.textContent = secsRemaining;
     timerObj = setInterval(() => { 
-        timerText.textContent = secsRemaining--;
-        if (secsRemaining < 0) clearInterval(timerObj);
+        secsRemaining--;
+        timerText.textContent = secsRemaining;
+        if (secsRemaining === 0) clearInterval(timerObj);
     },1000);
 };
 
