@@ -35,22 +35,47 @@ var highScores = [];   // an array of score objects
 // hide all children of the <main> tag
 function hideAllSections(){
     for (var i = 0; i < document.body.children[0].children.length; i++)
-    // document.body.children[0].children[i].style.visibility = 'hidden';
     document.body.children[0].children[i].style.display = 'none';
+}
+
+function displaySection(section){
+    hideAllSections();
+    
+    switch (section){
+        case 'intro-container':{
+            timerContainer.style.display = 'initial';
+            introContainer.style.display = 'initial';
+            timerText.textContent = 0;
+            break;
+        }
+        case 'question-container':{
+            timerContainer.style.display = 'initial';
+            questionContainer.style.display = 'initial';
+            break;
+        }
+        case 'final-score-container':{
+            timerContainer.style.display = 'initial';
+            finalScoreContainer.style.display = 'initial';
+            answerMessageContainer.style.display = 'initial';
+            finalScoreInitialsText.value = '';
+            finalScoreText.textContent = secsRemaining;
+            break;
+        }
+        case 'high-scores-container':{
+            highScoresContainer.style.display = 'initial';
+            highScoresList.innerHTML = '';
+            break;
+        }
+    }
 }
 
 function loadNextQuestion(){
     currentQuestionIdx++;
-
     // reached the end of questions
     if (currentQuestionIdx >= quiz.length){
         clearInterval(timerObj);
         hideAllSections();
-        timerContainer.style.display = 'initial';
-        finalScoreContainer.style.display = 'initial';
-        answerMessageContainer.style.display = 'initial';
-        finalScoreInitialsText.value = '';
-        finalScoreText.textContent = secsRemaining;
+        displaySection('final-score-container');
         return;
     }
 
@@ -68,15 +93,9 @@ function loadNextQuestion(){
 }
 
 
-
-
 var startQuizButtonClick = function (event){
     event.stopPropagation();
-    // initialize diplay state
-    hideAllSections();
-    timerContainer.style.display = 'initial';
-    questionContainer.style.display = 'initial';
-
+    displaySection('question-container');
     loadNextQuestion();
     
     //  display on page and decrement seconds remaining 
@@ -84,17 +103,12 @@ var startQuizButtonClick = function (event){
     timerText.textContent = secsRemaining;
     timerObj = setInterval(() => { 
         secsRemaining--;
-        timerText.textContent = secsRemaining;
-        if (secsRemaining === 0) {
+        if (secsRemaining <= 0) {
+            secsRemaining = 0;
             clearInterval(timerObj);
-            hideAllSections();
-            timerContainer.style.display = 'initial';
-            finalScoreContainer.style.display = 'initial';
-            answerMessageContainer.style.display = 'initial';
-            finalScoreText.textContent = secsRemaining;
-            finalScoreInitialsText.value = '';
-            timerText.textContent = secsRemaining;
-        }
+            displaySection('final-score-container');
+        } 
+        timerText.textContent = secsRemaining;
     },1000);
 };
 
@@ -102,7 +116,6 @@ var startQuizButtonClick = function (event){
 
 var questionChoiceMouseUp = function (event){
     event.stopPropagation();
-
     var el = event.target;
     var elIdx = (el.id[el.id.length-1]);
     
@@ -111,14 +124,6 @@ var questionChoiceMouseUp = function (event){
         answerMessageText.textContent = 'Wrong!';
         if (secsRemaining - 10 <= 0){
             secsRemaining = 0;
-            clearInterval(timerObj);
-            hideAllSections();
-            timerContainer.style.display = 'initial';
-            finalScoreContainer.style.display = 'initial';
-            answerMessageContainer.style.display = 'initial';
-            finalScoreText.textContent = secsRemaining;
-            finalScoreInitialsText.value = '';
-            timerText.textContent = secsRemaining;
         } else {
             secsRemaining -= 10;
         }
@@ -132,14 +137,12 @@ var questionChoiceMouseUp = function (event){
 
 var questionChoiceMouseDown = function (event){
     event.stopPropagation();
-
     var el = event.target;
     answerMessageContainer.style.visibility = 'hidden';
 }
 
 var finalScoreInitialsFormSubmit = function (event){
     event.preventDefault();
-    // event.stopPropagation();
     highScores.push({
         initials: finalScoreInitialsText.value.toUpperCase(),
         score: secsRemaining
@@ -158,9 +161,7 @@ var finalScoreInitialsFormSubmit = function (event){
         return 0; // a must equal to b
     })
 
-    hideAllSections();
-    highScoresContainer.style.display = 'initial';
-    highScoresList.innerHTML = '';
+    displaySection('high-scores-container');
 
     for (var i = 0; i < highScores.length; i++){
         var el = document.createElement('li');
@@ -172,10 +173,7 @@ var finalScoreInitialsFormSubmit = function (event){
 
 var goBackButtonClick = function (event){
     event.stopPropagation();
-    hideAllSections();
-    timerContainer.style.display = 'initial';
-    introContainer.style.display = 'initial';
-    timerText.textContent = 0;
+    displaySection('intro-container');
     currentQuestionIdx = -1;
     secsRemaining = START_SECS;
 };
@@ -189,9 +187,7 @@ var clearScoresButtonClick = function (event){
 
 var highScoresLinkCallback = function (event){
     event.stopPropagation();
-    hideAllSections();
-    highScoresContainer.style.display = 'initial';
-    highScoresList.innerHTML = '';
+    displaySection('high-scores-container');
 
     for (var i = 0; i < highScores.length; i++){
         var el = document.createElement('li');
@@ -201,9 +197,7 @@ var highScoresLinkCallback = function (event){
 };
 
 // set initial display state
-hideAllSections();
-timerContainer.style.display = 'initial';
-introContainer.style.display = 'initial';
+displaySection('intro-container');
 
 var localStorageItem = JSON.parse(localStorage.getItem('highScores'));
 if (localStorageItem !== null) highScores = localStorageItem;
