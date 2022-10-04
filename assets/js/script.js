@@ -66,7 +66,7 @@ var highScoresContainer = document.getElementById('high-scores-container');
 var answerMessageContainer = document.getElementById('answer-message-container');
 
 // user interaction elements
-var highScoresLink = document.querySelector('header a');
+var highScoresLink = document.querySelector('header p:first-child');
 var startQuizButton = document.getElementById('start-quiz-button');
 var submitScoreButton = document.getElementById('submit-score-button');
 var goBackButton = document.getElementById('go-back-button');
@@ -90,7 +90,7 @@ var currentQuestionIdx = -1;
 var highScores = [];   // an array of score objects
 
 // event listeners
-var highScoresLinkCallback = function (){};
+
 // var submitScoreButtonCallback = function (){};
 
 
@@ -231,7 +231,8 @@ var finalScoreInitialsFormSubmit = function (event){
 }
 
 
-var goBackButtonClick = function (){
+var goBackButtonClick = function (event){
+    event.stopPropagation();
     hideAllSections();
     timerContainer.style.visibility = 'visible';
     introContainer.style.visibility = 'visible';
@@ -240,11 +241,24 @@ var goBackButtonClick = function (){
     secsRemaining = START_SECS;
 };
 
-var clearScoresButtonClick = function (){
+var clearScoresButtonClick = function (event){
+    event.stopPropagation();
     highScores = [];
     highScoresList.innerHTML = '';
 };
 
+var highScoresLinkCallback = function (event){
+    event.stopPropagation();
+    hideAllSections();
+    highScoresContainer.style.visibility = 'visible';
+    highScoresList.innerHTML = '';
+
+    for (var i = 0; i < highScores.length; i++){
+        var el = document.createElement('li');
+        el.textContent = highScores[i].initials + ' - ' + highScores[i].score;
+        highScoresList.appendChild(el);
+    }
+};
 
 // set initial display state
 hideAllSections();
@@ -255,6 +269,7 @@ startQuizButton.addEventListener('click',startQuizButtonClick);
 finalScoreInitialsForm.addEventListener('submit',finalScoreInitialsFormSubmit);
 goBackButton.addEventListener('click', goBackButtonClick);
 clearScoresButton.addEventListener('click',clearScoresButtonClick);
+highScoresLink.addEventListener('click', highScoresLinkCallback);
 
 
 

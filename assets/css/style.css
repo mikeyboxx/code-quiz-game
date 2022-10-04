@@ -5,6 +5,14 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+header p:first-child {
+    color: blue;
+}
+
+header p:first-child:hover {
+    cursor: grab;
+}
+
 /* .choice {
     display: list-item;
 } */
