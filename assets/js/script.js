@@ -77,6 +77,7 @@ var timerText = document.getElementById('timer-text');
 var questionText = document.getElementById('question-text');
 var questionChoicesList = document.getElementById('question-choices-list');
 var finalScoreText = document.getElementById('final-score-text');
+var answerMessageText = document.getElementById('answer-message-text');
 
 // global variables
 var timerObj = {};
@@ -91,7 +92,6 @@ var scoreObj = {
 
 // event listeners
 var highScoresLinkCallback = function (){};
-var startQuizButtonCallback = function (){};
 var submitScoreButtonCallback = function (){};
 var goBackButtonCallback = function (){};
 var clearScoresButtonCallback = function (){};
@@ -123,7 +123,8 @@ function loadNextQuestion(){
         var el = document.createElement('li');
         el.id = 'l' + i;
         el.textContent = quiz[currentQuestionIdx].choices[i];
-        el.addEventListener('click', questionChoiceCallback);  // add click callback
+        el.addEventListener('mouseup', questionChoiceMouseUp);  // add click callback
+        el.addEventListener('mousedown', questionChoiceMouseDown);  // add click callback
         questionChoicesList.appendChild(el);
     }
 }
@@ -131,7 +132,7 @@ function loadNextQuestion(){
 
 
 
-var startQuizButtonCallback = function (event){
+var startQuizButtonClick = function (event){
     event.stopPropagation();
     // initialize diplay state
     hideAllSections();
@@ -152,13 +153,15 @@ var startQuizButtonCallback = function (event){
 
 
 
-var questionChoiceCallback = function (event){
+var questionChoiceMouseUp = function (event){
     event.stopPropagation();
 
     var el = event.target;
     var elIdx = (el.id[el.id.length-1]);
     
     if (quiz[currentQuestionIdx].answer !== Number(elIdx)){
+        answerMessageContainer.style.visibility = 'visible';
+        answerMessageText.textContent = 'Wrong!';
         if (secsRemaining - 10 < 0){
             clearInterval(timerObj);
             secsRemaining = 0;
@@ -167,17 +170,26 @@ var questionChoiceCallback = function (event){
             secsRemaining -= 10;
         }
     } else {
-        console.log('equal');
+        answerMessageContainer.style.visibility = 'visible';
+        answerMessageText.textContent = 'Correct!';
         loadNextQuestion();
     }
 };
+
+
+var questionChoiceMouseDown = function (event){
+    event.stopPropagation();
+
+    var el = event.target;
+    answerMessageContainer.style.visibility = 'hidden';
+}
 
 // set initial display state
 hideAllSections();
 timerContainer.style.visibility = 'visible';
 introContainer.style.visibility = 'visible';
 
-startQuizButton.addEventListener('click',startQuizButtonCallback);
+startQuizButton.addEventListener('click',startQuizButtonClick);
 
 
 
