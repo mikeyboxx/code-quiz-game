@@ -72,22 +72,29 @@ var submitScoreButton = document.getElementById('submit-score-button');
 var goBackButton = document.getElementById('go-back-button');
 var clearScoresButton = document.getElementById('clear-scores-button');
 
+// display elements
+var timerText = document.getElementById('timer-text');
+var questionText = document.getElementById('question-text');
+var questionChoicesList = document.getElementById('question-choices-list');
+
 // global variables
 var timerObj = {};
-var secsRemaining = 75;
+const START_SECS = 75;
+var secsRemaining = START_SECS;
+var currentQuestionIdx = -1;
+var highScores = [];   // an array of score objects
 var scoreObj = {
         initials: '',
         score: 0,   
     };
-var highScores = [];   // an array of score objects
 
 // event listeners
-var startQuizButtonCallback = function (){};
 var highScoresLinkCallback = function (){};
 var startQuizButtonCallback = function (){};
 var submitScoreButtonCallback = function (){};
 var goBackButtonCallback = function (){};
 var clearScoresButtonCallback = function (){};
+
 
 // hide all children of the <main> tag
 function hideAllSections(){
@@ -95,13 +102,68 @@ function hideAllSections(){
     document.body.children[0].children[i].style.visibility = 'hidden'
 }
 
+function loadNextQuestion(){
+    currentQuestionIdx++;
+
+    questionText.textContent = quiz[currentQuestionIdx].question;
+    questionChoicesList.innerHTML = '';
+    // generate <li> tags for every answer choice in the quiz object array
+    for (var i = 0; i < quiz[currentQuestionIdx].choices.length; i++){
+        var el = document.createElement('li');
+        el.id = 'l' + i;
+        el.textContent = quiz[currentQuestionIdx].choices[i];
+        el.addEventListener('click', questionChoiceCallback);  // add click callback
+        questionChoicesList.appendChild(el);
+    }
+}
+
+
+
+
+var startQuizButtonCallback = function (event){
+    event.stopPropagation();
+    // initialize diplay state
+    hideAllSections();
+    timerContainer.style.visibility = 'visible';
+    questionContainer.style.visibility = 'visible';
+
+    loadNextQuestion();
+    
+    //  display on page and decrement seconds remaining 
+    timerText.textContent = secsRemaining--;
+    // launch timer and display on page
+    timerObj = setInterval(() => { 
+        timerText.textContent = secsRemaining--;
+        if (secsRemaining < 0) clearInterval(timerObj);
+    },1000);
+};
+
+
+
+var questionChoiceCallback = function (event){
+    event.stopPropagation();
+
+    var el = event.target;
+    var elIdx = (el.id[el.id.length-1]);
+    
+    if (quiz[currentQuestionIdx].answer !== Number(elIdx)){
+        if (secsRemaining - 10 < 0){
+            clearInterval(timerObj);
+            secsRemaining = 0;
+            timerText.textContent = secsRemaining;
+        } else {
+            secsRemaining -= 10;
+        }
+    } else {
+        console.log('equal');
+        loadNextQuestion();
+    }
+};
+
 // set initial display state
 hideAllSections();
 timerContainer.style.visibility = 'visible';
 introContainer.style.visibility = 'visible';
-
-
-
 
 startQuizButton.addEventListener('click',startQuizButtonCallback);
 
