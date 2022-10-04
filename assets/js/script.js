@@ -84,7 +84,7 @@ var highScoresList = document.getElementById('high-scores-list');
 
 // global variables
 var timerObj = {};
-const START_SECS = 5;
+const START_SECS = 10;
 var secsRemaining = START_SECS;
 var currentQuestionIdx = -1;
 var highScores = [];   // an array of score objects
@@ -93,7 +93,7 @@ var highScores = [];   // an array of score objects
 var highScoresLinkCallback = function (){};
 // var submitScoreButtonCallback = function (){};
 
-var clearScoresButtonCallback = function (){};
+
 
 
 // hide all children of the <main> tag
@@ -208,11 +208,12 @@ var finalScoreInitialsFormSubmit = function (event){
         score: secsRemaining
     });
 
+    // sort in descending order. highest scores show up first
     highScores.sort((a, b)=>{
-        if (a.score < b.score){
+        if (a.score > b.score){  
             return -1;
         }
-        if (a.score > b.score){
+        if (a.score < b.score){
             return 1;
         }
         return 0; // a must equal to b
@@ -234,7 +235,14 @@ var goBackButtonClick = function (){
     hideAllSections();
     timerContainer.style.visibility = 'visible';
     introContainer.style.visibility = 'visible';
+    timerText.textContent = 0;
     currentQuestionIdx = -1;
+    secsRemaining = START_SECS;
+};
+
+var clearScoresButtonClick = function (){
+    highScores = [];
+    highScoresList.innerHTML = '';
 };
 
 
@@ -246,6 +254,7 @@ introContainer.style.visibility = 'visible';
 startQuizButton.addEventListener('click',startQuizButtonClick);
 finalScoreInitialsForm.addEventListener('submit',finalScoreInitialsFormSubmit);
 goBackButton.addEventListener('click', goBackButtonClick);
+clearScoresButton.addEventListener('click',clearScoresButtonClick);
 
 
 
