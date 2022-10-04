@@ -65,15 +65,50 @@ var finalScoreContainer = document.getElementById('final-score-container');
 var highScoresContainer = document.getElementById('high-scores-container');
 var answerMessageContainer = document.getElementById('answer-message-container');
 
+// user interaction elements
+var highScoresLink = document.querySelector('header a');
+var startQuizButton = document.getElementById('start-quiz-button');
+var submitScoreButton = document.getElementById('submit-score-button');
+var goBackButton = document.getElementById('go-back-button');
+var clearScoresButton = document.getElementById('clear-scores-button');
 
+// global variables
+var timerObj = {};
+var secsRemaining = 75;
+var scoreObj = {
+        initials: '',
+        score: 0,   
+    };
+var highScores = [];   // an array of score objects
 
+// event listeners
+var startQuizButtonCallback = function (){};
+var highScoresLinkCallback = function (){};
+var startQuizButtonCallback = function (){};
+var submitScoreButtonCallback = function (){};
+var goBackButtonCallback = function (){};
+var clearScoresButtonCallback = function (){};
+
+// hide all children of the <main> tag
+function hideAllSections(){
+    for (var i = 0; i < document.body.children[0].children.length; i++)
+    document.body.children[0].children[i].style.visibility = 'hidden'
+}
 
 // set initial display state
+hideAllSections();
 timerContainer.style.visibility = 'visible';
 introContainer.style.visibility = 'visible';
-questionContainer.style.visibility = 'hidden';
-finalScoreContainer.style.visibility = 'hidden';
-highScoresContainer.style.visibility = 'hidden';
-answerMessageContainer.style.visibility = 'hidden';
+
+
+
+
+startQuizButton.addEventListener('click',startQuizButtonCallback);
+
+
+
+
+
+
 
 
