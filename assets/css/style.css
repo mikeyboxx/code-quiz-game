@@ -39,7 +39,7 @@ body {
 
 #intro-container {
      /* display: flex; */
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     justify-content: space-around;
     align-items: center;
     font-size: 1.3em;
@@ -64,7 +64,7 @@ body {
 
 #question-container {
      /* display: flex; */
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     justify-content: space-around;
     align-items: start;
     /* font-size: 1.3em; */
@@ -126,7 +126,7 @@ body {
 
 #final-score-container {
     /* display: flex; */
-   flex-flow: column wrap;
+   flex-flow: column nowrap;
    justify-content: space-between;
    align-items: start;
    font-size: 1.3em;
@@ -167,7 +167,7 @@ body {
 #high-scores-container {
      /* display: flex; */
      line-height: 1;
-     flex-flow: column wrap;
+     flex-flow: column nowrap;
      justify-content: space-between;
      align-items: center;
      font-size: 1.3em;
@@ -185,13 +185,15 @@ body {
 
 #button-wrapper {
     display: flex;
+    flex-flow: row wrap;
     width: 100%;
     justify-content: space-around;
 }
 
 #go-back-button, #clear-scores-button {
     width: 40%;
-    height: 30px;
+    height: 40px;
+    /* padding: 5px; */
     border-radius: 10px;
     font-size: .8em;
     background-color: navy;
