@@ -156,9 +156,8 @@ button:active,
     flex-flow: column nowrap;
     font-size: 1.2em;
     height: 300px;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin: 100px auto;
-    width: 30%;
 }
 
 #high-scores-list {
@@ -172,13 +171,13 @@ button:active,
 #button-wrapper {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
-    width: 55%;
+    justify-content: space-evenly;
 }
 
 #go-back-button, #clear-scores-button {
+    flex: 15%;
     border-radius: 12px;
     font-size: .8em;
     height: 40px;
-    width: 40%;
+    margin: 0 15px;
 }

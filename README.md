@@ -20,16 +20,13 @@ To visit site, navigate to the following HTTP address:
 
 ## Screenshot
 
-The following image shows the web application's appearance and functionality:
+The following images show the web application's appearance and functionality:
 
-![alt text](assets/img/screenshot.png)
+![Intro Page](assets/img/screenshot.png)
+![Question Page](assets/img/screenshot-2.png)
+![Result Score Page](assets/img/screenshot-3.png)
+![High Scores Page](assets/img/screenshot-4.png)
 
 ---
 
-## Tests
-
-1. Visit site and make surte it is responsive to most moibile devices
-2. Make sure all links are functional
-3. Make sure that img tags have the alt parameter set for accessibility
-4. Make sure that there are no non-semantic tags in the HTML viewed in DevTools
 
