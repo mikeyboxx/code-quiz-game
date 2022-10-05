@@ -8,10 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-    <main>
+    <main id="main">
         <header id="timer-container">
-            <p>View High Scores<p>
-            <p>Timer: <span id="timer-text">0</span></p>
+            <p>View High Scores</p>
+            <p>Time: <span id="timer-text">0</span></p>
         </header>
         <section id="intro-container">
             <h1>Coding Quiz Challenge</h1>
@@ -19,21 +19,25 @@
             <button id="start-quiz-button">Start Quiz</button>
         </section>
         <section id="question-container">
-            <pre id="question-text">
+            <p id="question-text">
                 The question content and the answer list items will be dynamically _________.
-            </pre>
+            </p>
             <ol id="question-choices-list">
                 <li id="li0">buried</li>
                 <li id="li1">fried</li>
                 <li id="li2">generated</li>
                 <li id="li3">thrown out</li>
             </ol>
+            <!-- <section id="answer-message-container">
+                <hr>
+                <p id="answer-message-text"></p>
+            </section> -->
         </section>
         <section id="final-score-container">
             <h2>All Done!</h2>
             <p>Your final score is <span id="final-score-text">22</span>.</p>
-            <form id="final-score-initials-form" action="">
-                <label for="initials">Enter your initials: </label>
+            <form id="final-score-initials-form" action="submit">
+                <label for="final-score-initials-text">Enter initials: </label>
                 <input type="text" 
                         name="initials" 
                         id="final-score-initials-text" 
@@ -49,8 +53,10 @@
                 <li>AG - 234</li>
                 <li>BW - 122</li>
             </ol>
-            <button id="go-back-button">Go Back</button>
-            <button id="clear-scores-button">Clear High Scores</button>
+            <div id="button-wrapper">
+                <button id="go-back-button">Go Back</button>
+                <button id="clear-scores-button">Clear High Scores</button>
+            </div>
         </section>
         <footer id="answer-message-container">
             <hr>

@@ -26,7 +26,7 @@ var highScoresList = document.getElementById('high-scores-list');
 
 // global variables
 var timerObj = {};
-const START_SECS = 10;
+const START_SECS = 75;
 var secsRemaining = START_SECS;
 var currentQuestionIdx = -1;
 var highScores = [];   // an array of score objects
@@ -43,26 +43,26 @@ function displaySection(section){
     
     switch (section){
         case 'intro-container':{
-            timerContainer.style.display = 'initial';
-            introContainer.style.display = 'initial';
+            timerContainer.style.display = 'flex';
+            introContainer.style.display = 'flex';
             timerText.textContent = 0;
             break;
         }
         case 'question-container':{
-            timerContainer.style.display = 'initial';
-            questionContainer.style.display = 'initial';
+            timerContainer.style.display = 'flex';
+            questionContainer.style.display = 'flex';
             break;
         }
         case 'final-score-container':{
-            timerContainer.style.display = 'initial';
-            finalScoreContainer.style.display = 'initial';
-            answerMessageContainer.style.display = 'initial';
+            timerContainer.style.display = 'flex';
+            finalScoreContainer.style.display = 'flex';
+            answerMessageContainer.style.display = 'flex';
             finalScoreInitialsText.value = '';
             finalScoreText.textContent = secsRemaining;
             break;
         }
         case 'high-scores-container':{
-            highScoresContainer.style.display = 'initial';
+            highScoresContainer.style.display = 'flex';
             highScoresList.innerHTML = '';
             break;
         }
@@ -115,12 +115,13 @@ var startQuizButtonClick = function (event){
 
 
 var questionChoiceMouseUp = function (event){
+    console.log('mouseup');
     event.stopPropagation();
     var el = event.target;
     var elIdx = (el.id[el.id.length-1]);
     
     if (quiz[currentQuestionIdx].answer !== Number(elIdx)){
-        answerMessageContainer.style.display = 'initial';
+        answerMessageContainer.style.display = 'flex';
         answerMessageText.textContent = 'Wrong!';
         if (secsRemaining - 10 <= 0){
             secsRemaining = 0;
@@ -128,7 +129,7 @@ var questionChoiceMouseUp = function (event){
             secsRemaining -= 10;
         }
     } else {
-        answerMessageContainer.style.display = 'initial';
+        answerMessageContainer.style.display = 'flex';
         answerMessageText.textContent = 'Correct!';
         loadNextQuestion();
     }
@@ -136,9 +137,10 @@ var questionChoiceMouseUp = function (event){
 
 
 var questionChoiceMouseDown = function (event){
+    console.log('mousedown')
     event.stopPropagation();
     var el = event.target;
-    answerMessageContainer.style.visibility = 'hidden';
+    answerMessageContainer.style.display = 'none';
 }
 
 var finalScoreInitialsFormSubmit = function (event){
