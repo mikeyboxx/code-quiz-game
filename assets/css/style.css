@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 body {
@@ -9,18 +9,33 @@ body {
     line-height: 2.3em;
 }
 
+/* make all buttons and choice list items behave like a link */
+button, 
+#question-choices-list li {
+    background-color: navy;
+    color: white;
+    cursor: pointer;
+}
+
+/* when user clicks, change the background color to make it more interactive */
+button:active, 
+#question-choices-list li:active {
+    background-color: rgb(213, 51, 167);
+}
+
 #timer-container {
     display: flex;
     font-size: 1.1em;
-    margin: 10px 25px 100px 25px;
     justify-content: space-between;
+    margin: 10px 25px 100px 25px;
 }
 
+/* make the <p> behave like a link */
 #timer-container p:first-child {
     color: blue;
 }
 
-#timer-container p:first-child:hover, button {
+#timer-container p:first-child:hover{
     cursor: pointer;
 }
 
@@ -29,98 +44,86 @@ body {
 }
 
 #intro-container {
+    align-items: center;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-around;
-    align-items: center;
     font-size: 1.3em;
-    width: 75%; 
     height: 275px;
+    justify-content: space-around;
     margin: auto;
     text-align: center;
+    width: 75%; 
 }
 
 #start-quiz-button {
-    width: 200px;
-    height: 50px;
     border-radius: 10px;
     font-size: 1.1em;
-    background-color: navy;
-    color: white;
-}
-
-#start-quiz-button:active {
-    background-color: rgb(213, 51, 167);
+    height: 50px;
+    width: 200px;
 }
 
 #question-container {
+    align-items: start;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-around;
-    align-items: start;
-    width: 75%; 
     margin: auto;
     padding-left: 80px;
+    width: 75%; 
 }
 
 #question-text{
     flex: 100%;
-    font-weight: bold;
     font-size: 1.6em;
+    font-weight: bold;
     padding-bottom: 10px;;
 }
 
+/* make the ordered list items show up inside the border */
 #question-choices-list {
     list-style: decimal inside;
 }
 
 #question-choices-list li{
-    padding: 8px 20px 8px 20px;
-    margin-top: 15px;
+    border: 1px solid black;
     border-radius: 10px;
     font-size: 1.2em;
-    background-color: navy;
-    color: white;
-    border: 1px solid black;
-    cursor: pointer;
-}
-
-#question-choices-list li:active {
-    background-color: rgb(213, 51, 167);
+    margin-top: 15px;
+    padding: 8px 20px 8px 20px;
 }
 
 #answer-message-container {
     display: flex;
     flex-flow: column nowrap;
-    width: 75%; 
-    padding-left: 80px;;
     margin: auto;
+    padding-left: 80px;;
+    width: 75%; 
 }
 
 #answer-message-container hr{
-    margin-top:45px;
-    flex: 100%;
     border: 1px solid grey;
+    flex: 100%;
     font-weight: lighter;
+    margin-top:45px;
 }
 
 #answer-message-text {
-    margin-top: 10px;
+    color: gray;
     font-size: 1.8em;
     font-style: italic;
-    color: gray;
     font-weight: lighter;
+    margin-top: 10px;
 }
 
 #final-score-container {
+    align-items: start;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
-    align-items: start;
     font-size: 1.3em;
-    width: 61%; 
     height: 135px;
+    justify-content: space-between;
     margin: auto;
+    width: 61%; 
 }
 
 #final-score-container p  {
@@ -129,9 +132,9 @@ body {
 
 #final-score-initials-form {
     display: flex;
+    font-size: 1.3em;
     justify-content: space-between;
     width: 100%;
-    font-size: 1.3em;
 }
 
 #final-score-initials-text {
@@ -139,59 +142,49 @@ body {
 }
 
 #submit-score-button {
-    width: 20%;
-    height: 40px;
     border-radius: 10px;
+    height: 40px;
     font-size: .8em;
-    background-color: navy;
-    color: white;
-}
-
-#submit-score-button:active {
-    background-color: rgb(213, 51, 167);
+    width: 20%;
 }
 
 #high-scores-container {
-    display: flex;
-    line-height: 1;
-    flex-flow: column nowrap;
-    justify-content: space-evenly;
     align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
     font-size: 1.3em;
-    width: 30%;
     height: 250px;
+    justify-content: space-evenly;
+    line-height: 1;
     margin-left: 400px;
     margin-top: 200px;
+    width: 30%;
 }
 
 #high-scores-list {
-    padding: 10px;
-    list-style: decimal inside;
     border-radius: 5px;
+    list-style: decimal inside;
+    padding: 10px;
 }
 
 #button-wrapper {
     display: flex;
     flex-flow: row wrap;
-    width: 100%;
     justify-content: space-around;
     padding: 0 10px;
+    width: 100%;
 }
 
 #go-back-button {
-    width: 25%;
-    height: 40px;
     border-radius: 10px;
     font-size: .7em;
-    background-color: navy;
-    color: white;
+    height: 40px;
+    width: 25%;
 }
 
 #go-back-button, #clear-scores-button {
-    width: 25%;
-    height: 40px;
     border-radius: 10px;
     font-size: .7em;
-    background-color: navy;
-    color: white;
+    height: 40px;
+    width: 25%;
 }
