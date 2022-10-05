@@ -168,34 +168,38 @@ body {
      /* display: flex; */
      line-height: 1;
      flex-flow: column nowrap;
-     justify-content: space-between;
+     justify-content: space-evenly;
      align-items: center;
      font-size: 1.3em;
-     width: 40%;
+     width: 30%;
      height: 250px;
-     margin-left: 300px;
+     margin-left: 400px;
      margin-top: 200px;
 }
 
 
 #high-scores-list {
+    padding: 10px;
     list-style: decimal inside;
     background-color: bisque;
+    border-radius: 5px;
+    border: 1px solid black;
 }
 
 #button-wrapper {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    padding: 0 10px;
 }
 
 #go-back-button, #clear-scores-button {
-    width: 40%;
+    width: 30%;
     height: 40px;
     /* padding: 5px; */
     border-radius: 10px;
-    font-size: .8em;
+    font-size: .7em;
     background-color: navy;
     color: white;
 }
