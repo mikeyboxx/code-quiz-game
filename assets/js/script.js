@@ -115,7 +115,6 @@ var startQuizButtonClick = function (event){
 
 
 var questionChoiceMouseUp = function (event){
-    console.log('mouseup');
     event.stopPropagation();
     var el = event.target;
     var elIdx = (el.id[el.id.length-1]);
@@ -137,7 +136,6 @@ var questionChoiceMouseUp = function (event){
 
 
 var questionChoiceMouseDown = function (event){
-    console.log('mousedown')
     event.stopPropagation();
     var el = event.target;
     answerMessageContainer.style.display = 'none';

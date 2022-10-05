@@ -6,7 +6,7 @@
 
 body {
     font-family: Verdana,  Tahoma, sans-serif;
-    line-height: 2.3em;
+    line-height: 1.8em;
 }
 
 /* make all buttons and choice list items behave like a link */
@@ -49,10 +49,11 @@ button:active,
     flex-flow: column nowrap;
     font-size: 1.3em;
     height: 275px;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: auto;
+    padding-top: 50px;
     text-align: center;
-    width: 75%; 
+    width: 50%; 
 }
 
 #start-quiz-button {
@@ -96,7 +97,7 @@ button:active,
     display: flex;
     flex-flow: column nowrap;
     margin: auto;
-    padding-left: 80px;;
+    padding-left: 80px;
     width: 75%; 
 }
 
@@ -123,7 +124,7 @@ button:active,
     height: 135px;
     justify-content: space-between;
     margin: auto;
-    width: 61%; 
+    width: 65%; 
 }
 
 #final-score-container p  {
@@ -138,6 +139,7 @@ button:active,
 }
 
 #final-score-initials-text {
+    font-size: .9em;
     width: 50%;
 }
 
@@ -152,39 +154,31 @@ button:active,
     align-items: center;
     display: flex;
     flex-flow: column nowrap;
-    font-size: 1.3em;
-    height: 250px;
-    justify-content: space-evenly;
-    line-height: 1;
-    margin-left: 400px;
-    margin-top: 200px;
+    font-size: 1.2em;
+    height: 300px;
+    justify-content: space-between;
+    margin: 100px auto;
     width: 30%;
 }
 
 #high-scores-list {
     border-radius: 5px;
+    color: red;
+    font-weight: bold;
+    line-height: 1.5em;
     list-style: decimal inside;
-    padding: 10px;
 }
 
 #button-wrapper {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    padding: 0 10px;
-    width: 100%;
-}
-
-#go-back-button {
-    border-radius: 10px;
-    font-size: .7em;
-    height: 40px;
-    width: 25%;
+    width: 55%;
 }
 
 #go-back-button, #clear-scores-button {
-    border-radius: 10px;
-    font-size: .7em;
+    border-radius: 12px;
+    font-size: .8em;
     height: 40px;
-    width: 25%;
+    width: 40%;
 }
