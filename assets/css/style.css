@@ -124,7 +124,8 @@ button:active,
     height: 135px;
     justify-content: space-between;
     margin: auto;
-    width: 65%; 
+    padding-left: 80px;
+    width: 75%; 
 }
 
 #final-score-container p  {
