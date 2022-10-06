@@ -7,7 +7,7 @@ var highScoresContainer = document.getElementById('high-scores-container');
 var answerMessageContainer = document.getElementById('answer-message-container');
 
 // user interaction elements
-var highScoresLink = document.querySelector('header p:first-child');
+var highScoresLink = document.querySelector('#timer-container p:first-child');
 var startQuizButton = document.getElementById('start-quiz-button');
 var submitScoreButton = document.getElementById('submit-score-button');
 var goBackButton = document.getElementById('go-back-button');
@@ -45,16 +45,19 @@ function displaySection(section){
         case 'intro-container':{
             timerContainer.style.display = 'flex';
             introContainer.style.display = 'flex';
+            highScoresLink.style.visibility = 'visible';
             timerText.textContent = 0;
             break;
         }
         case 'question-container':{
             timerContainer.style.display = 'flex';
+            highScoresLink.style.visibility = 'hidden';
             questionContainer.style.display = 'flex';
             break;
         }
         case 'final-score-container':{
             timerContainer.style.display = 'flex';
+            highScoresLink.style.visibility = 'hidden';
             finalScoreContainer.style.display = 'flex';
             answerMessageContainer.style.display = 'flex';
             finalScoreInitialsText.value = '';
