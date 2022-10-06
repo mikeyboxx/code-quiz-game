@@ -5,34 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Document</title>
+    <title>Javascript Quiz Game</title>
 </head>
 <body>
     <main id="main">
+        <!-- The header contains a link to view high scores, and a timer that displays number of secs left on the clock -->
         <header id="timer-container">
             <p>View High Scores</p>
             <p>Time: <span id="timer-text">0</span></p>
         </header>
+        <!-- This section contains game instructions and a start game button -->
         <section id="intro-container">
             <h1>Coding Quiz Challenge</h1>
             <p>Answer the following code related questions within the time limit. Your score is the remianing time on the clock. Keep in mind that incorrect answers will penalize your time/score by 10 seconds!</p>
             <button id="start-quiz-button">Start Quiz</button>
         </section>
+        <!-- This section contains the question and a dynamically generated list of answers -->
         <section id="question-container">
             <p id="question-text">
                 The question content and the answer list items will be dynamically _________.
             </p>
+            <!-- This is generated in javascript -->
             <ol id="question-choices-list">
                 <li id="li0">buried</li>
                 <li id="li1">fried</li>
                 <li id="li2">generated</li>
                 <li id="li3">thrown out</li>
             </ol>
-            <!-- <section id="answer-message-container">
-                <hr>
-                <p id="answer-message-text"></p>
-            </section> -->
         </section>
+        <!-- This section contains the final score and a form to submit the initals and save the high score -->
         <section id="final-score-container">
             <h2>All Done!</h2>
             <p>Your final score is <span id="final-score-text">22</span>.</p>
@@ -46,8 +47,10 @@
                 <button id="submit-score-button" >Submit</button>
             </form>
         </section>
+        <!-- This section contains a list of high scores -->
         <section id="high-scores-container">
             <h2>High Scores</h2>
+            <!-- The high scores are dynamically generated in javascript -->
             <ol id="high-scores-list">
                 <li>MN - 345</li>
                 <li>AG - 234</li>
@@ -58,6 +61,7 @@
                 <button id="clear-scores-button">Clear High Scores</button>
             </div>
         </section>
+        <!-- This section contains a message whether the selected answer is correct or wrong -->
         <footer id="answer-message-container">
             <hr>
             <p id="answer-message-text"></p>
